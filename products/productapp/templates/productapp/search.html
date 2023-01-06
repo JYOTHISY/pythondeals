@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Search Product</title>
+</head>
+<body>
+<h1 style="background-color:Tomato;">Search from Database</h1>
+
+<form action="" method="GET"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <input type="text" name="query" id="query" placeholder="search your product here!">
+    <input type="submit"  value="Search">
+</form>
+
+<h2>Search result:</h2><br>
+
+{% if productlist %}
+<div class="container ">
+  <div class="row">
+      {% for product in productlist %}
+    <div class="col-md-4">
+
+            <div class="card  border-primary  m-2">
+              <img src="{{product.productImage.url}}" class="card-img-top" alt="..." height="200px">
+
+                <ul class="list-group list-group-flush border-primary ">
+                  <li class="list-group-item border-primary ">{{product.productName}}</li>
+                  <li class="list-group-item border-primary ">{{product.price}}</li>
+                  <li class="list-group-item border-primary ">{{product.unit}}</li>
+                </ul>
+
+            </div>
+
+
+    </div>
+       {% endfor %}
+  </div>
+</div>
+  {% else %}
+<p>NO PRODUCTS TO DISPLAY</p>
+{% endif %}
+</body>
+</html>
